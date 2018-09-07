@@ -1,0 +1,62 @@
+<main role="main" class="container">
+  <div class="jumbotron">
+    <div class="">
+        <H2>Relatório</H2>
+        <hr/>
+    </div>
+    <form action="">
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+              <label for="validationCustom01">Data Inicio</label>
+              <input type="date" class="form-control" id="validationCustom01"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="validationCustom01">Data Final</label>
+              <input type="date" class="form-control" id="validationCustom01"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" > Mostrar</button>
+    </form>
+
+    </div>
+    
+    <div ng-controller="relatorioController as ctrl">
+      
+      <table class="table table-bordered table-hover" >
+        <thead class="thead-dark">
+            <th >Data </th>
+            <th>Movimento </th>
+            <th >Valor </th>
+        </thead>
+
+        <tr >
+          <td>01/01/2917</td>
+          <td>Entrada</td>
+          <td>R$1000,00</td>
+
+        </tr>
+
+        <tr >
+          <td>01/01/2018</td>
+          <td>Saida</td>
+          <td>R$14000,00</td>
+
+        </tr>
+
+
+        <tr >
+          <td>01/01/2018</td>
+          <td>Entrada</td>
+          <td>R$100000,00</td>
+
+        </tr>
+      </table>
+    </div>
+  </div>
+</main>
