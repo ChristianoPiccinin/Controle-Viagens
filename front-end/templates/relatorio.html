@@ -21,7 +21,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" > Mostrar</button>
+          <button type="submit" class="btn btn-primary btn-block" ng-click="listar()" > Mostrar</button>
     </form>
 
     </div>
@@ -29,34 +29,35 @@
     <div ng-controller="relatorioController as ctrl">
       
       <table class="table table-bordered table-hover" >
-        <thead class="thead-dark">
+        <thead class="table-head table-border">
             <th >Data </th>
             <th>Movimento </th>
             <th >Valor </th>
         </thead>
+        <tbody>
+          <tr ng-repeat="registro in registrots">
+            <td>{{registro.data}}</td>
+            <td>{{registro.movimento}}</td>
+            <td>{{registro.valor}}</td>
+            
+          </tr>
+         
+        </tbody>
 
-        <tr >
-          <td>01/01/2917</td>
-          <td>Entrada</td>
-          <td>R$1000,00</td>
-
-        </tr>
-
-        <tr >
-          <td>01/01/2018</td>
-          <td>Saida</td>
-          <td>R$14000,00</td>
-
-        </tr>
-
-
-        <tr >
-          <td>01/01/2018</td>
-          <td>Entrada</td>
-          <td>R$100000,00</td>
-
-        </tr>
       </table>
+      <table  class="table table-bordered table-hover">
+        <thead class="table-head table-border ">
+          <tr>
+            <th>Total Entrada </th>
+            <th>Total  Saida</th>
+            <th>Resultado</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+        </tbody>
+      </table>
+
     </div>
   </div>
 </main>

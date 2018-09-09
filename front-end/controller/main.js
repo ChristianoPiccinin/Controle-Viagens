@@ -30,14 +30,36 @@ app.config(['$routeProvider', function ($routeProvider) {
  * Controllers
  */
 app.controller('ViagemCtrl', function ($scope, $location) {
+    
+    $scope.viagens = [
+        {data:'teste', nota:'teste',origem:'teste',destino:'teste',valor:'teste'}
+    ];
+    
+
+    $scope.salvar = function() {
+        $scope.viagens.push($scope.viagem);
+		console.log($scope.viagem);
+       
+    }
+
 
 });
 
 app.controller('DespesaCtrl', function ($scope, $location) {
 
+    $scope.despesas = [
+        {data:'teste', descricao:'teste',valor:'teste'}
+    ];
+    
+
+    $scope.salvar = function() {
+        $scope.despesas.push($scope.despesa);		       
+    }
 });
 
-app.controller('RelatorioCtrl', function ($scope, $location) {
+app.controller('RelatorioCtrl', function ($scope, $location,$http) {
+    $http.get('controller/relatoriojson.json').then(function (response) {
+        $scope.registros = response.data.relatorio;
+    })
 
 });
-
