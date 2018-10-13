@@ -1,0 +1,55 @@
+<main role="main" class="container">
+  <div class="jumbotron">
+    <div class="">
+        <H2>Viagens</H2>
+        <hr/>
+    </div>
+    
+    <form action="">
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+              <label for="validationCustom01">Data</label>
+              <input type="date" class="form-control" id="viagem_data" ng-model="viagem.data"  />
+              
+            </div>
+            <div class="col-md-3 mb-4">
+              <label for="validationCustom02">Numero da Nota</label>
+              <input type="number" class="form-control" id="viagem_num_nota" placeholder="00000000" ng-model="viagem.nota" />
+             
+            </div>
+            <div class="col-md-3 mb-4">
+              <label for="validationCustomUsername">Origem</label>
+              
+                <input type="text" class="form-control" id="viagem_origem" placeholder="Origem da viagem" ng-model="viagem.origem" />
+                <div class="invalid-feedback">
+                  Digite a origem.
+                </div>
+            
+            </div>
+            <div class="col-md-3 mb-4">
+              <label for="validationCustomUsername">Destino</label>
+          
+                <input type="text" class="form-control" id="viagem_destino" placeholder="Destino da viagem" ng-model="viagem.destino" aria-describedby="inputGroupPrepend" />
+                <div class="invalid-feedback">
+                  Digite o destino.
+                </div>
+              
+            </div>
+            <div class="col-md-3 mb-4">
+                <label for="validationCustomUsername">Valor</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">R$</span>
+                  </div>
+                  <input type="number" class="form-control" id="viagem_valor" ng-model="viagem.valor" placeholder="0.00" step="0.1" min="0" aria-describedby="inputGroupPrepend" />
+                  <div class="invalid-feedback">
+                    Digite o valor.
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <button type="submit" ng-click="criarViagem()" class="btn btn-success btn-block" >INSERIR</button>
+    </form>
+  </div>
+</main>
