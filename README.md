@@ -6,7 +6,9 @@ Estou desenvolvendo um projeto de controle de viagens para o meu pai. Nele será
 
 ``` shell
 $npm install express --save 
+
 $npm install mysql --save
+
 node server.js
    
 ```
