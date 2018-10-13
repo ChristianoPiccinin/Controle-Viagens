@@ -4,9 +4,14 @@ Estou desenvolvendo um projeto de controle de viagens para o meu pai. Nele será
 
 ## Requisitos
 
-npm i express --s 
+``` shell
+$npm install express --save 
+$npm install mysql --save
+node server.js
+   
+```
 
-npm i mysql --s
+
 
 
 <img src="https://github.com/ChristianoPiccinin/Controle-Viagens/blob/master/img-md/viagens.PNG" alt="Viagens" />
