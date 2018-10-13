@@ -63,11 +63,15 @@ app.controller('DespesaCtrl', function ($scope, $location , $http) {
 
     $scope.criarDespesa = function () {
         
-        console.log($scope.despesa);
+        console.log("CHRISTIANO");
+        console.log($scope.despesa.data);
+        console.log($scope.despesa.descricao);
+        console.log($scope.despesa.valor);
 
 
         $scope.loader.loading = true;
-        $http.post('/api/insertdespesa', {
+        
+        $http.post('/api/inserirdespesa', {
             'data':      $scope.despesa.data,
             'descricao': $scope.despesa.descricao,
             'valor' :    $scope.despesa.valor
@@ -91,27 +95,43 @@ app.controller('RelatorioCtrl', function ($scope, $location, $http) {
 
     $scope.listarRegistros = function () {
 
-        console.log( $scope.relatorio.datainicio);
+        console.log($scope.relatorio.datainicio);
         console.log($scope.relatorio.datafim);
-        
-        
-        /*
-        $scope.loader.loading = true;
-        $http.post('/api/report', {
+
+
+        /*$http.get("api/report", {
             'datainicio': $scope.relatorio.datainicio,
-            'datafinal':  $scope.relatorio.datafim
-            
-        })
-        .success(function (data, status, headers, config) {
-            console.log("Ok!");
-            
+            'datafim': $scope.relatorio.datafim
+
+        })*/
+        $http.get("api/report")
+        .success(function (response) {
+            /*if (response.error === 2) {
+                //if error code is returned from node code, then there are no entries in db!
+                $scope.statustext = "There are currently no products available!";
+                $scope.loader.loading = false;
+            } else {
+                $scope.names = response.products;
+                //Turn off spinner
+                $scope.loader.loading = false;
+                $scope.statustext = "";
+            }*/
+
+            console.log("Report Sucesso");
         })
         .error(function (data, status, headers, config) {
-                console.log("Nok!");
-                $scope.loader.loading = false;
+            $scope.loader.loading = false;
+            console.log("erro no relatorio");
+            /*
+            $scope.statustext = "There was an error fetching data, please check database connection!";
+            */
         });
-        */
+
     };
   
 
 });
+
+
+
+    

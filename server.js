@@ -37,34 +37,40 @@ app.get('/', function (req, res) {
 	res.sendFile( __dirname + "/" + "index.html" );
 });
 
-/*
-// This responds a GET request for the /list page.
-app.get('/api/list', function (req, res) {
-	console.log("GET Request :: /list");
-	log.info('GET Request :: /list');
+
+
+app.get('/api/report', function (req, res) {
+	console.log("GET Request :: /report");
+
+	/*var dataInicio = req.body.datainicio;
+	var dataFim    = req.body.datafim;
+	console.log(dataInicio);
+	console.log(dataFim);
+	*/
 	var data = {
         "error": 1,
         "products": ""
     };
 	
 	pool.getConnection(function (err, connection) {
-		connection.query('SELECT * from products', function (err, rows, fields) {
+		//connection.query("SELECT * FROM viagem WHERE data BETWEEN date(?) AND date(?)",[dataInicio,  dataFim], function (err, rows, fields) {
+		connection.query("SELECT * FROM viagem ", function (err, rows, fields) {
 			connection.release();
-
+			console.log(rows);
 			if (rows.length !== 0 && !err) {
 				data["error"] = 0;
-				data["products"] = rows;
+				data["despesas"] = rows;
 				res.json(data);
 			} else if (rows.length === 0) {
 				//Error code 2 = no rows in db.
 				data["error"] = 2;
-				data["products"] = 'No products Found..';
+				data["despesas"] = 'No products Found..';
 				res.json(data);
 			} else {
-				data["products"] = 'error while performing query';
+				data["despesas"] = 'error while performing query';
 				res.json(data);
 				console.log('Error while performing Query: ' + err);
-				log.error('Error while performing Query: ' + err);
+				
 			}
 		});
 	
@@ -72,105 +78,6 @@ app.get('/api/list', function (req, res) {
 });
 
 
-
-//UPDATE Product
-app.put('/api/update', function (req, res) {
-    var id = req.body.id;
-    var name = req.body.name;
-    var description = req.body.description;
-    var price = req.body.price;
-    var data = {
-        "error": 1,
-        "product": ""
-    };
-	console.log('PUT Request :: /update: ' + id);
-	log.info('PUT Request :: /update: ' + id);
-    if (!!id && !!name && !!description && !!price) {
-		pool.getConnection(function (err, connection) {
-			connection.query("UPDATE products SET name = ?, description = ?, price = ? WHERE id=?",[name,  description, price, id], function (err, rows, fields) {
-				if (!!err) {
-					data["product"] = "Error Updating data";
-					console.log(err);
-					log.error(err);
-				} else {
-					data["error"] = 0;
-					data["product"] = "Updated Book Successfully";
-					console.log("Updated: " + [id, name, description, price]);
-					log.info("Updated: " + [id, name, description, price]);
-				}
-				res.json(data);
-			});
-		});
-    } else {
-        data["product"] = "Please provide all required data (i.e : id, name, desc, price)";
-        res.json(data);
-    }
-});
-
-//LIST Product by ID
-app.get('/api/list/:id', function (req, res) {
-	var id = req.params.id;
-	var data = {
-        "error": 1,
-        "product": ""
-    };
-	
-	console.log("GET request :: /list/" + id);
-	log.info("GET request :: /list/" + id);
-	pool.getConnection(function (err, connection) {
-		connection.query('SELECT * from products WHERE id = ?', id, function (err, rows, fields) {
-			connection.release();
-			
-			if (rows.length !== 0 && !err) {
-				data["error"] = 0;
-				data["product"] = rows;
-				res.json(data);
-			} else {
-				data["product"] = 'No product Found..';
-				res.json(data);
-				console.log('Error while performing Query: ' + err);
-				log.error('Error while performing Query: ' + err);
-			}
-		});
-	
-	});
-});
-
-
-
-app.post('/api/delete', function (req, res) {
-    var id = req.body.id;
-    var data = {
-        "error": 1,
-        "product": ""
-    };
-	console.log('DELETE Request :: /delete: ' + id);
-	log.info('DELETE Request :: /delete: ' + id);
-    if (!!id) {
-		pool.getConnection(function (err, connection) {
-			connection.query("DELETE FROM products WHERE id=?",[id],function (err, rows, fields) {
-				if (!!err) {
-					data["product"] = "Error deleting data";
-					console.log(err);
-					log.error(err);
-				} else {
-					data["product"] = 0;
-					data["product"] = "Delete product Successfully";
-					console.log("Deleted: " + id);
-					log.info("Deleted: " + id);
-				}
-				res.json(data);
-			});
-		});
-    } else {
-        data["product"] = "Please provide all required data (i.e : id ) & must be a integer";
-        res.json(data);
-    }
-});
-*/
-
-
-//INSERT new product
 app.post('/api/insertviagem', function (req, res) {
 
 	var dataViagem    =	req.body.data;
@@ -206,6 +113,44 @@ app.post('/api/insertviagem', function (req, res) {
 	}
 	
 });
+
+
+
+app.post('/api/inserirdespesa', function (req, res) {
+
+	var dataDespesa   =	req.body.data;
+	var descDespesa   = req.body.descricao;
+	var valorDespesa  =	req.body.valor;
+	var data = {
+        "error": 1,
+        "product": ""
+    };
+
+
+    if (!!dataDespesa && !!descDespesa && !!valorDespesa) {
+		pool.getConnection(function (err, connection) {
+			connection.query("INSERT INTO despesa SET dt = ?, descricao = ?,valor = ?",[dataDespesa,  descDespesa, valorDespesa], function (err, rows, fields) {
+				if (!!err) {
+					data["despesa"] = "Erro ao adicionar dados em despesa";
+					console.log(err);
+					log.error(err);
+				} else {
+					data["error"] = 0;
+					data["despesa"] = "Despesa adicionada com sucesso.";
+					console.log("Adicionado: " + [dataDespesa,  descDespesa, valorDespesa]);
+					
+				}
+				res.json(data);
+			});
+        });
+    } else {
+        data["despesa"] = "Verificar dados de despesa";
+        res.json(data);
+	}
+	
+});
+
+
 
 
 
